@@ -134,11 +134,34 @@ class Contact {
         }
     }
     
-    // Get all contacts
-    public static function getAll() {
+    // Get all contacts with optional search and sorting
+    public static function getAll($search = '', $sort = '', $order = 'ASC') {
         $db = Database::getInstance();
         $conn = $db->getConnection();
-        $result = $conn->query("SELECT * FROM contacts ORDER BY full_name ASC");
+        
+        // Build query with search and sort
+        $query = "SELECT * FROM contacts";
+        
+        // Add search condition if provided
+        if (!empty($search)) {
+            $search = $conn->real_escape_string($search);
+            $query .= " WHERE full_name LIKE '%{$search}%' OR surname LIKE '%{$search}%' OR email LIKE '%{$search}%' OR phone LIKE '%{$search}%'";
+        }
+        
+        // Add sorting if provided
+        if (!empty($sort)) {
+            $allowedSortColumns = ['full_name', 'surname', 'email', 'phone', 'created_at'];
+            if (in_array($sort, $allowedSortColumns)) {
+                $order = ($order === 'DESC') ? 'DESC' : 'ASC';
+                $query .= " ORDER BY {$sort} {$order}";
+            } else {
+                $query .= " ORDER BY full_name ASC"; // Default sort
+            }
+        } else {
+            $query .= " ORDER BY full_name ASC"; // Default sort
+        }
+        
+        $result = $conn->query($query);
         
         $contacts = [];
         if ($result->num_rows > 0) {

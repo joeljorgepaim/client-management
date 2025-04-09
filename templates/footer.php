@@ -2,25 +2,15 @@
 // templates/footer.php
 ?>
         </main>
+        
+        <footer class="mt-5 pt-5 text-muted border-top">
+            <p>&copy; <?php echo date('Y'); ?> Client Management System</p>
+        </footer>
     </div>
     
-    <footer class="mt-auto">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; <?php echo date('Y'); ?> Client Management System</p>
-                </div>
-                <div class="col-md-6 text-md-right">
-                    <p class="mb-0">Version 1.0</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Global JavaScript functions
         $(document).ready(function() {
@@ -28,7 +18,6 @@
             $('#client-name').on('blur', function() {
                 const name = $(this).val();
                 if (name && $('#client-code').val() === '') {
-                    $('.client-code-loader').removeClass('d-none');
                     $.ajax({
                         url: '<?php echo BASE_URL; ?>?ajax=generate_client_code',
                         method: 'POST',
@@ -36,10 +25,6 @@
                         dataType: 'json',
                         success: function(response) {
                             $('#client-code').val(response.client_code);
-                            $('.client-code-loader').addClass('d-none');
-                        },
-                        error: function() {
-                            $('.client-code-loader').addClass('d-none');
                         }
                     });
                 }
@@ -55,24 +40,41 @@
                 $(form).addClass('was-validated');
             });
             
-            // Animate alert fade-out
-            setTimeout(function() {
-                $('.alert').alert('close');
-            }, 5000); // Auto close alerts after 5 seconds
+            // Delete client button functionality
+            $('.delete-client').click(function(e) {
+                e.preventDefault();
+                const clientId = $(this).data('id');
+                const clientName = $(this).data('name');
+                
+                $('#client-id-to-delete').val(clientId);
+                $('#client-name-to-delete').text(clientName);
+                $('#deleteClientModal').modal('show');
+            });
             
-            // Initialize tooltips
-            $('[data-toggle="tooltip"]').tooltip();
-            
-            // Add animation to cards
-            $('.card').addClass('animate__animated animate__fadeIn');
-            
-            // Add active class to sidebar based on URL
-            $(".nav-link").each(function() {
-                if (window.location.href.indexOf($(this).attr('href')) > -1) {
-                    $(this).addClass('active');
-                }
+            // Delete contact button functionality
+            $('.delete-contact').click(function(e) {
+                e.preventDefault();
+                const contactId = $(this).data('id');
+                const contactName = $(this).data('name');
+                
+                $('#contact-id-to-delete').val(contactId);
+                $('#contact-name-to-delete').text(contactName);
+                $('#deleteContactModal').modal('show');
             });
         });
+        
+        // Alternative direct functions if jQuery event binding doesn't work
+        function deleteClient(id, name) {
+            document.getElementById('client-id-to-delete').value = id;
+            document.getElementById('client-name-to-delete').innerText = name;
+            $('#deleteClientModal').modal('show');
+        }
+        
+        function deleteContact(id, name) {
+            document.getElementById('contact-id-to-delete').value = id;
+            document.getElementById('contact-name-to-delete').innerText = name;
+            $('#deleteContactModal').modal('show');
+        }
     </script>
 </body>
 </html>

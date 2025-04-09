@@ -1,20 +1,18 @@
 <?php
 // classes/Client.php
-require_once 'database.php';
+require_once 'Database.php';
 
 class Client {
     private $id;
     private $name;
     private $clientCode;
-    private $created_at; // Added created_at property
     private $db;
     
-    public function __construct($id = null, $name = '', $clientCode = '', $created_at = null) {
+    public function __construct($id = null, $name = '', $clientCode = '') {
         $this->db = Database::getInstance();
         $this->id = $id;
         $this->name = $name;
         $this->clientCode = $clientCode;
-        $this->created_at = $created_at;
     }
     
     // Getters and setters
@@ -42,16 +40,6 @@ class Client {
     
     public function setClientCode($clientCode) {
         $this->clientCode = $clientCode;
-        return $this;
-    }
-    
-    // Getter for created_at
-    public function getCreatedAt() {
-        return $this->created_at;
-    }
-    
-    public function setCreatedAt($created_at) {
-        $this->created_at = $created_at;
         return $this;
     }
     
@@ -98,21 +86,39 @@ class Client {
         }
     }
     
-    // Get all clients
-    public static function getAll() {
+    // Get all clients with optional search and sorting
+    public static function getAll($search = '', $sort = '', $order = 'ASC') {
         $db = Database::getInstance();
         $conn = $db->getConnection();
-        $result = $conn->query("SELECT * FROM clients ORDER BY name ASC");
+        
+        // Build query with search and sort
+        $query = "SELECT * FROM clients";
+        
+        // Add search condition if provided
+        if (!empty($search)) {
+            $search = $conn->real_escape_string($search);
+            $query .= " WHERE name LIKE '%{$search}%' OR client_code LIKE '%{$search}%'";
+        }
+        
+        // Add sorting if provided
+        if (!empty($sort)) {
+            $allowedSortColumns = ['name', 'client_code', 'created_at'];
+            if (in_array($sort, $allowedSortColumns)) {
+                $order = ($order === 'DESC') ? 'DESC' : 'ASC';
+                $query .= " ORDER BY {$sort} {$order}";
+            } else {
+                $query .= " ORDER BY name ASC"; // Default sort
+            }
+        } else {
+            $query .= " ORDER BY name ASC"; // Default sort
+        }
+        
+        $result = $conn->query($query);
         
         $clients = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $client = new Client(
-                    $row['id'], 
-                    $row['name'], 
-                    $row['client_code'],
-                    $row['created_at'] ?? null // Add created_at field
-                );
+                $client = new Client($row['id'], $row['name'], $row['client_code']);
                 $clients[] = $client;
             }
         }
@@ -131,12 +137,7 @@ class Client {
         
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
-            $client = new Client(
-                $row['id'], 
-                $row['name'], 
-                $row['client_code'],
-                $row['created_at'] ?? null // Add created_at field
-            );
+            $client = new Client($row['id'], $row['name'], $row['client_code']);
             $stmt->close();
             return $client;
         } else {
