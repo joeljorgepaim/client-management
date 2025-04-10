@@ -1,7 +1,4 @@
 <?php
-// pages/contact_view.php
-
-// Get contact ID from URL
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $contact = Contact::getById($id);
 

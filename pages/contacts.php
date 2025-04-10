@@ -1,20 +1,16 @@
 <?php
-// pages/contacts.php
-
-// Get search parameters
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'full_name';
 $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
 
-// Get all contacts with search and sorting
+
 $contacts = Contact::getAll($search, $sort, $order);
 
-// Determine next sort order
 function getNextOrder($currentSort, $requestedSort, $currentOrder) {
     if ($currentSort === $requestedSort) {
         return ($currentOrder === 'ASC') ? 'DESC' : 'ASC';
     }
-    return 'ASC'; // Default to ASC when changing sort column
+    return 'ASC'; 
 }
 ?>
 

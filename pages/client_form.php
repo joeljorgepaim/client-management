@@ -1,7 +1,6 @@
 <?php
-// pages/client_form.php
 
-// Initialize variables
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $errors = [];

@@ -1,7 +1,7 @@
 <?php
-// pages/home.php
 
-// Get summary counts
+
+
 $db = Database::getInstance();
 $conn = $db->getConnection();
 

@@ -1,6 +1,4 @@
 <?php
-// pages/client_view.php
-
 // Get client ID from URL
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $client = Client::getById($id);

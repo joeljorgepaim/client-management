@@ -1,5 +1,4 @@
 <?php
-// classes/Client.php
 require_once 'Database.php';
 
 class Client {

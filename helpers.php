@@ -1,14 +1,12 @@
 <?php
-// helpers.php
 
-// Start session if not already started
 function session_start_if_needed() {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 }
 
-// Set flash message
+
 function set_message($message, $type = 'info') {
     session_start_if_needed();
     $_SESSION['message'] = $message;

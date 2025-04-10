@@ -1,6 +1,4 @@
 <?php
-// pages/clients.php
-
 // Get search parameters
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'name';
