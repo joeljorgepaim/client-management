@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="tel" class="form-control" id="phone" name="phone" 
                        value="<?php echo htmlspecialchars($contact ? $contact->getPhone() : ''); ?>">
                 <small class="form-text text-muted">
-                    Optional. Format: Country code and number (e.g., +1 123-456-7890)
+                    Optional. Format: Country code and number (e.g., +264 81-111-7890)
                 </small>
             </div>
             

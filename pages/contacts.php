@@ -124,7 +124,7 @@ function getNextOrder($currentSort, $requestedSort, $currentOrder) {
                                     <a href="<?php echo BASE_URL; ?>?page=contact_view&id=<?php echo $contact->getId(); ?>" class="btn btn-sm btn-info">
                                         <i class="fa fa-eye"></i> View
                                     </a>
-                                    <a href="<?php echo BASE_URL; ?>?page=contact_form&id=<?php echo $contact->getId(); ?>" class="btn btn-sm btn-primary">
+                                    <a style="background-color: darkgray; border-color: darkgray;" href="<?php echo BASE_URL; ?>?page=contact_form&id=<?php echo $contact->getId(); ?>" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-sm btn-danger delete-contact" data-id="<?php echo $contact->getId(); ?>" data-name="<?php echo htmlspecialchars($contact->getFullName() . ' ' . $contact->getSurname()); ?>" onclick="deleteContact(<?php echo $contact->getId(); ?>, '<?php echo htmlspecialchars(addslashes($contact->getFullName() . ' ' . $contact->getSurname())); ?>')">

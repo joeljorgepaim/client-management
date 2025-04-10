@@ -4,7 +4,7 @@
         </main>
         
         <footer class="mt-5 pt-5 text-muted border-top">
-            <p>&copy; <?php echo date('Y'); ?> Client Management System</p>
+            <p>&copy; <?php echo date('Y'); ?> Created by: Joel Paim</p>
         </footer>
     </div>
     

@@ -1,8 +1,5 @@
 <?php
-// init.php
-// This file should be included at the beginning of index.php
-
-// Start session
+ob_start();
 session_start();
 
 // Set error reporting in development mode

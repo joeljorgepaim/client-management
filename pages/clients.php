@@ -102,7 +102,7 @@ function getNextOrder($currentSort, $requestedSort, $currentOrder) {
                                     <a href="<?php echo BASE_URL; ?>?page=client_view&id=<?php echo $client->getId(); ?>" class="btn btn-sm btn-info">
                                         <i class="fa fa-eye"></i> View
                                     </a>
-                                    <a href="<?php echo BASE_URL; ?>?page=client_form&id=<?php echo $client->getId(); ?>" class="btn btn-sm btn-primary">
+                                    <a style="background-color: darkgray; border-color: darkgray;" href="<?php echo BASE_URL; ?>?page=client_form&id=<?php echo $client->getId(); ?>" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-sm btn-danger delete-client" data-id="<?php echo $client->getId(); ?>" data-name="<?php echo htmlspecialchars($client->getName()); ?>" onclick="deleteClient(<?php echo $client->getId(); ?>, '<?php echo htmlspecialchars(addslashes($client->getName())); ?>')">

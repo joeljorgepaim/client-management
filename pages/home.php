@@ -30,7 +30,7 @@ $recentContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC 
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="stat-title text-primary">Total Clients</div>
+                        <div class="stat-title ">Total Clients</div>
                         <div class="stat-value"><?php echo $clientCount; ?></div>
                     </div>
                     <div class="col-auto">
@@ -54,7 +54,7 @@ $recentContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC 
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="stat-title text-success">Total Contacts</div>
+                        <div class="stat-title ">Total Contacts</div>
                         <div class="stat-value"><?php echo $contactCount; ?></div>
                     </div>
                     <div class="col-auto">
@@ -78,7 +78,7 @@ $recentContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC 
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="stat-title text-info">Client-Contact Links</div>
+                        <div class="stat-title">Client-Contact Links</div>
                         <div class="stat-value"><?php echo $linkCount; ?></div>
                     </div>
                     <div class="col-auto">
@@ -97,7 +97,7 @@ $recentContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC 
     <div class="col-lg-6">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">
+                <h6 class="m-0 font-weight-bold ">
                     <i class="fas fa-building mr-1"></i> Recent Clients
                 </h6>
                 <a href="<?php echo BASE_URL; ?>?page=client_form" class="btn btn-sm btn-primary">
@@ -148,7 +148,7 @@ $recentContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC 
     <div class="col-lg-6">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-success">
+                <h6 class="m-0 font-weight-bold ">
                     <i class="fas fa-address-card mr-1"></i> Recent Contacts
                 </h6>
                 <a href="<?php echo BASE_URL; ?>?page=contact_form" class="btn btn-sm btn-success">
